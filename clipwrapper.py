@@ -1,7 +1,7 @@
 import os,sys,torch,pickle,pathlib
 from tqdm import tqdm
-from .similarity import SimilarityCalculator
-from .local.clip import* 
+from similarity_calculator import SimilarityCalculator
+from local.clip import* 
 
 class ClipTransform:
     def __init__(self,model_sel) -> None:
@@ -48,32 +48,15 @@ class ClipWrapper():
         image_features /= image_features.norm(dim=-1, keepdim=True)
         return image_features
     
-    def get_predictions_softmax(self,images,topk=1):
+    def get_predictions(self,images,dis_func):
         image_features = self.generate_img_features(images)
-        image_features = image_features[:, None, :]
-        similarity = torch.abs(image_features - self.text_features)
-        similarity = similarity.sum(dim=-1)
-        similarity = torch.neg(similarity)
-        values, indices = similarity.topk(topk)
+        values, indices,similarity = self.similarity_calculator(self.text_features,image_features,dis_func=dis_func)
         return values, indices
     
-    def get_predictions(self,images,topk=1):
-        image_features = self.generate_img_features(images)
-        similarity = (100.0 * image_features @ self.text_features.T).softmax(dim=-1)
-        values, indices = similarity.topk(topk)
-        return values, indices
-    
-    def print_result(self,images):
-        values, indices = self.get_predictions(images,topk=len(self.classes))
-        values, indices = values[0], indices[0]
-        print("\nTop predictions:\n")
-        for value, index in zip(values, indices):
-            print(f"{self.classes[index]:>16s}: {100 * value.item():.2f}%")
-    
-    def eval_dataset_text(self,dataset):
+    def eval_dataset_text(self,dataset,dis_func='Cos'):
         acc,nums = 0,0
         for images, labels in tqdm(dataset):
-            values, indices = self.get_predictions(images)
+            values, indices = self.get_predictions(images,dis_func=dis_func)
             indices = torch.flatten(indices)
             result = torch.eq(labels.to(self.device),indices.to(self.device))
             acc += torch.sum(result)
@@ -81,6 +64,20 @@ class ClipWrapper():
         acc = acc.to(torch.float) / nums
         print(acc)
         return acc
+    
+    def eval_dataset_lvp(self,lvp,label,dataset,dis_func='Cos'):
+        acc,num_data = 0,0
+        label = label.to(self.device)
+        for image_features, labels in tqdm(dataset):
+            values, indices, similarity = self.similarity_calculator(lvp,image_features,dis_func=dis_func)
+            indices = torch.flatten(indices)
+            indices = label[indices]
+            result = torch.eq(labels.to(self.device),indices.to(self.device))
+            acc += torch.sum(result)
+            num_data += len(labels)
+        acc = acc.to(torch.float) / num_data
+        print('accuracy: ',acc)
+        return acc,num_data
     
     def inference_dataset(self,dataset):
         data  = {'data':[],'targets':[]}
