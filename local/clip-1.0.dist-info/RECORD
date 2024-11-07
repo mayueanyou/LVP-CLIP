@@ -1,0 +1,17 @@
+clip-1.0.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+clip-1.0.dist-info/LICENSE,sha256=mH5jsy9sif9RYOQpRYqHL_BI5oYLWQo5Euk4-dqPFNs,1064
+clip-1.0.dist-info/METADATA,sha256=Nc4-nIGSpqDjxPi04rj2WrsjQ3A2oQtLfsVjWhe5vQ8,252
+clip-1.0.dist-info/RECORD,,
+clip-1.0.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+clip-1.0.dist-info/WHEEL,sha256=yQN5g4mg4AybRjkgi-9yy4iQEFibGQmlz78Pik5Or-A,92
+clip-1.0.dist-info/direct_url.json,sha256=kIci8C8_AsWLFOBz3eHWy-7Opa-b7iPbIyqHzePzBP0,130
+clip-1.0.dist-info/top_level.txt,sha256=qr0grg7Skv7Se9f25eVy1TC4jJbxlIVbnogG6XbrLjY,5
+clip/__init__.py,sha256=15MOspDr7UMhFnlckUcyANCYRRqUwK7dSuD5NPl5Veg,20
+clip/__pycache__/__init__.cpython-310.pyc,,
+clip/__pycache__/clip.cpython-310.pyc,,
+clip/__pycache__/model.cpython-310.pyc,,
+clip/__pycache__/simple_tokenizer.cpython-310.pyc,,
+clip/bpe_simple_vocab_16e6.txt.gz,sha256=kkaRrCiOVECSNhFWUq1KolD0ggPeUKnkcipuzUjWgEo,1356917
+clip/clip.py,sha256=SrTVGHgjeSwUmXgIhU_iGdxIUEJgbUOXV6cEog1XqvQ,9695
+clip/model.py,sha256=mQLL5e6Qodoqo-bwQ-iiPcH4gxGTuWN4XJrwPVx77yw,17374
+clip/simple_tokenizer.py,sha256=0bCfEO09Hiw0NhnLmMv6y5I2PdhgdSakOqf-LWDRW60,4632
