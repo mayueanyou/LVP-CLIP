@@ -35,7 +35,15 @@ The class vector in the pool is generated as a combination of both image and tex
 
 This variant employs a standard linear classifier trained directly on the features consolidated within the LVP, using the pool's information to define the classification boundary.
 
+### Method Overview
+
 ![method](images/method.png)
+
+### Cross-Task Incremental Learning(CTIL)
+
+Our proposed CTIL is a combination of CIL and DIL that allows for learning tasks in sequences, regardless of the task type.
+
+![method](images/CTIL.png)
 
 ## Key Contributions
 
@@ -114,7 +122,7 @@ The results for LVP-IT and LVP-C could be higher because I did not grid search t
 | Model Name | RN50 | RN101 | RN50x4 | RN50x16 | RN50x64 | ViT-B/16 | ViT-B/32 | ViT-L/14 | ViT-L/14@336px |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | model_sel | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-| LVP-T  | 0 | 1 | 2 | 3 | 4 | 64.79 | 61.68 | 73.30 | 72.00 |
+| LVP-T(zero-shot)  | 0 | 1 | 2 | 3 | 4 | 64.79 | 61.68 | 73.30 | 72.00 |
 | LVP-I  | 0 | 1 | 2 | 3 | 4 | 70.01 | 66.06 | 80.08 | 79.37 |
 | LVP-IT | 0 | 1 | 2 | 3 | 4 | 73.15 | 70.11 | 81.87 | 81.00 |
 | LVP-C  | 0 | 1 | 2 | 3 | 4 | 71.20 | 66.56 | 80.24 | 79.37 |
