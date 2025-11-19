@@ -10,15 +10,25 @@ Yue Ma, Huantao Ren, Boyu Wang, Jingang Jin, Senem Velipasalar, Qinru Qiu
 
 -----
 
-We use the offcial CLIP model from (https://github.com/openai/CLIP) and include it in the local folder for convernience.
+We use the official CLIP model provided by OpenAI (https://github.com/openai/CLIP), which is included locally for convenience.
 
-## Abstract
 
-Continual learning (CL) aims to update a model so that it can sequentially learn new tasks without forgetting previously acquired knowledge. Recent CL approaches often leverage the vision-language model **CLIP** for its high-dimensional feature space and cross-modality feature matching capabilities.
+## Proposed Method: Label Vector Pool (LVP)
 
-However, traditional CLIP-based classification is sensitive to the quality of text phrases and less effective for classes lacking meaningful text labels. In this work, we **rethink CLIP-based continual learning** and introduce the concept of **Label Vector Pool (LVP)**. LVP replaces text labels with **training images** as similarity references, eliminating the need for ideal text descriptions. We present three variations of LVP and demonstrate their performance on class and domain incremental learning tasks.
+The core idea of **LVP** is to leverage the rich feature space of CLIP by directly using **visual embeddings** from training samples as class prototypes, rather than relying on potentially noisy or inadequate text embeddings. **LVP** is not limited to CLIP model but can be used in any other pretraind mdoels as well.
 
------
+![method](images/LVP.png)
+
+### LVP-I(Image-Only LVP)
+
+![features follow gussian distribution](images/gusian.png)
+
+### LVP-IT(Image and Text Combined LVP)
+
+### LVP-C
+
+
+![method](images/method.png)
 
 ## Key Contributions
 
@@ -27,26 +37,6 @@ However, traditional CLIP-based classification is sensitive to the quality of te
   * **State-of-the-Art Performance:** Our proposed LVP-based methods significantly **outperform the current state-of-the-art baseline by a margin of 40.7%** on Cross-Task Incremental Learning(CTIL) tasks.
 
 -----
-
-## Motivation
-
-### featurs follow gussian distrbution
-
-![features follow gussian distribution](images/gusian.png)
-
-![method](images/method.png)
-
-## Proposed Method: Label Vector Pool (LVP)
-
-The core idea of **LVP** is to leverage the rich feature space of CLIP by directly using **visual embeddings** from training samples as class prototypes, rather than relying on potentially noisy or inadequate text embeddings.
-
-![method](images/LVP.png)
-
-<img src="images/LVP.png" alt="Alt Text" width="400"/>
-
-  * LVP eliminates the dependency on the quality of hand-crafted or auto-generated text prompts/labels.
-  * We explore **three variations** of the LVP strategy to maximize performance and efficiency across different continual learning scenarios.
-  * -----
 
 ## Setup and Installation
 
