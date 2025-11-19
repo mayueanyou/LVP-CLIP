@@ -55,3 +55,20 @@ conda activate lvp_clip
 
 # Install dependencies
 pip install -r requirements.txt
+```
+
+
+## Citation
+
+If you find this work useful for your research, please cite our paper:
+
+```
+@InProceedings{Ma_2025_CVPR,
+    author    = {Ma, Yue and Ren, Huantao and Wang, Boyu and Jin, Jingang and Velipasalar, Senem and Qiu, Qinru},
+    title     = {LVP-CLIP: Revisiting CLIP for Continual Learning with Label Vector Pool},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+    month     = {June},
+    year      = {2025},
+    pages     = {231-240}
+}
+```
