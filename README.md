@@ -10,6 +10,8 @@ Yue Ma, Huantao Ren, Boyu Wang, Jingang Jin, Senem Velipasalar, Qinru Qiu
 
 -----
 
+We use the offcial CLIP model from (https://github.com/openai/CLIP) and include it in the local folder for convernience.
+
 ## Abstract
 
 Continual learning (CL) aims to update a model so that it can sequentially learn new tasks without forgetting previously acquired knowledge. Recent CL approaches often leverage the vision-language model **CLIP** for its high-dimensional feature space and cross-modality feature matching capabilities.
@@ -25,6 +27,10 @@ However, traditional CLIP-based classification is sensitive to the quality of te
   * **State-of-the-Art Performance:** Our proposed LVP-based methods significantly **outperform the current state-of-the-art baseline by a margin of 40.7%** on Cross-Task Incremental Learning(CTIL) tasks.
 
 -----
+
+![Screenshot of the main app window](images/method.png)
+
+![Screenshot of the main app window](images/gusian.png)
 
 ## Proposed Method: Label Vector Pool (LVP)
 
