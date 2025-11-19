@@ -8,8 +8,9 @@ Yue Ma, Huantao Ren, Boyu Wang, Jingang Jin, Senem Velipasalar, Qinru Qiu
 
 We use the official CLIP model provided by OpenAI (https://github.com/openai/CLIP), which is included locally for convenience.
 
-## Proposed Method: Label Vector Pool (LVP)
+## Proposed Method
 
+### The Concept of Label Vector Pool (LVP)
 The core idea of **LVP** is to leverage the rich feature space of CLIP by directly using **visual embeddings** from training samples as class prototypes, rather than relying on potentially noisy or inadequate text embeddings. Furthermore, the **LVP** concept is not limited to the CLIP model; it can be effectively applied to **any other pre-trained model** with a robust feature extractor.
 
 ![method](images/LVP.png)
@@ -59,7 +60,20 @@ conda activate lvp_clip
 pip install -r requirements.txt
 ```
 
-## Run The Demo
+## Run The Demo on CIFAR100
+
+Any function could use the -m to select the models, by default is **5** which is the **ViT-B/16**
+
+```
+# Convert the CIFAR100 dataset to image embeddings(use ViT-B/16)
+python3 main.py -f cifar100_generate_image_embedings
+
+# Convert the CIFAR100 dataset to image embeddings(use ViT-L/14@336px )
+python3 main.py -f cifar100_generate_image_embedings -m 8
+
+```
+
+
 
 ```
 # Convert the CIFAR100 dataset to image embeddings(This will save your time as we don't need to convert everytime)
@@ -91,17 +105,19 @@ python3 main.py -f cifar100_eval_lvp_c
 
 ```
 
-## Result in the Demo
+## Result for CIFAR100
 
-The code I provided is ignoring the Continual Learning settings. I believe the code is easy to read and execute. The results for LVP-IT could be higher because I did not grid search the optimal hyperparameters.
+The provided code excludes the Continual Learning settings, which simplifies both reading and execution.
+All the results below were produced by running this repository.
+The results for LVP-IT and LVP-C could be higher because I did not grid search the optimal hyperparameters.
 
-| Model Name | RN50 | RN101 | RN50x4 | RN50x16 | RN50x64 | ViT-B/16 | ViT-B/32 | ViT-L/14 | ViT-L/14@336px 
+| Model Name | RN50 | RN101 | RN50x4 | RN50x16 | RN50x64 | ViT-B/16 | ViT-B/32 | ViT-L/14 | ViT-L/14@336px |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | model_sel | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-| LVI-T  | 0 | 1 | 2 | 3 | 4 | 64.79 | 6 | 7 | 8 |
-| LVI-I  | 0 | 1 | 2 | 3 | 4 | 70.01 | 6 | 7 | 8 |
-| LVI-IT | 0 | 1 | 2 | 3 | 4 | 73.15 | 6 | 7 | 8 |
-| LVI-C  | 0 | 1 | 2 | 3 | 4 | 71.20 | 6 | 7 | 8 |
+| LVP-T  | 0 | 1 | 2 | 3 | 4 | 64.79 | 61.68 | 73.30 | 72.00 |
+| LVP-I  | 0 | 1 | 2 | 3 | 4 | 70.01 | 66.06 | 80.08 | 79.37 |
+| LVP-IT | 0 | 1 | 2 | 3 | 4 | 73.15 | 70.11 | 81.87 | 81.00 |
+| LVP-C  | 0 | 1 | 2 | 3 | 4 | 71.20 | 66.56 | 80.24 | 79.37 |
 
 ## Citation
 
