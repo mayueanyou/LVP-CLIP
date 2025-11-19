@@ -84,7 +84,8 @@ python3 main.py -f cifar100_generate_image_embedings -m 8
 
 
 ```
-# Convert the CIFAR100 dataset to image embeddings(This will save your time as we don't need to convert everytime)
+# Convert the CIFAR100 dataset to image embeddings
+#(This will save your time as we don't need to convert everytime)
 python3 main.py -f cifar100_generate_image_embedings
 
 # Generate the LVP-I for CIFAR100
