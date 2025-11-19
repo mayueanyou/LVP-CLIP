@@ -87,6 +87,33 @@ def cifar100_generate_lvp_it(args):
     lvp_it = model()
     torch.save(lvp_it.detach().cpu(),f'./data/cifar100_lvp_it_{args.model_sel}.pt')
 
+def cifar100_generate_lvp_c(args):
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    lvp_it = torch.load(f'./data/cifar100_lvp_it_{args.model_sel}.pt')
+    labels = torch.arange(100)
+    
+    model = nn.Linear(lvp_it.shape[1],100).to(device)
+    optimizer = torch.optim.Adam(model.parameters(),lr=0.01)
+    loss_fn = nn.CrossEntropyLoss()
+    
+    dataset_loader = torch.utils.data.DataLoader(CustomDataset(lvp_it,labels),batch_size=100,shuffle=False)
+    
+    for epoch in range(150):
+        avg_loss = 0
+        for lvp_it_batch, labels_batch in tqdm(dataset_loader):
+            lvp_it_batch = lvp_it_batch.to(device)
+            labels_batch = labels_batch.to(device)
+            outputs = model(lvp_it_batch)
+            loss = loss_fn(outputs,labels_batch)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            avg_loss += loss.item()
+        print(f'epoch: {epoch}, loss: {avg_loss / len(dataset_loader)}')
+    torch.save(model.state_dict(),f'./data/cifar100_lvp_c_{args.model_sel}.pt')
+
+
+
 def cifar100_eval_lvp(args):
     cw = ClipWrapper(model_sel=args.model_sel)
     data = torch.load(f'./data/cifar100_img_embeddings_{args.model_sel}.pt')
@@ -94,6 +121,26 @@ def cifar100_eval_lvp(args):
     test_data = data['test']
     test_dataset_loader = torch.utils.data.DataLoader(CustomDataset(test_data['data'],test_data['targets']),batch_size=256,shuffle=False,num_workers=4)
     acc,num_data = cw.eval_dataset_lvp(lvp,torch.arange(100),test_dataset_loader)
+
+def cifar100_eval_lvp_c(args):
+    data = torch.load(f'./data/cifar100_img_embeddings_{args.model_sel}.pt')
+    lvp_it = torch.load(f'./data/cifar100_lvp_it_{args.model_sel}.pt')
+    model = nn.Linear(lvp_it.shape[1],100)
+    model.load_state_dict(torch.load(f'./data/cifar100_lvp_c_{args.model_sel}.pt'))
+    model.eval()
+    test_data = data['test']
+    test_dataset_loader = torch.utils.data.DataLoader(CustomDataset(test_data['data'],test_data['targets']),batch_size=256,shuffle=False,num_workers=4)
+    acc,num_data = 0,0
+    for image_features, labels in tqdm(test_dataset_loader):
+        image_features = image_features.to('cpu')
+        labels = labels.to('cpu')
+        outputs = model(image_features)
+        predicted = torch.argmax(outputs, dim=1)
+        acc += (predicted == labels).sum().item()
+        num_data += len(labels)
+    acc = acc / num_data
+    print(f'accuracy: {acc}')
+
 
 
 if __name__ == '__main__':

@@ -74,6 +74,9 @@ python3 main.py -f cifar100_generate_lvp_t
 # Generate the LVP-IT for CIFAR100
 python3 main.py -f cifar100_generate_lvp_it
 
+# Generate the LVP-C for CIFAR100
+python3 main.py -f cifar100_generate_lvp_c
+
 # Evalue the Performace of LVP-I for CIFAR100
 python3 main.py -f cifar100_eval_lvp -lvp i
 
@@ -83,14 +86,22 @@ python3 main.py -f cifar100_eval_lvp -lvp t
 # Evalue the Performace of LVP-IT for CIFAR100
 python3 main.py -f cifar100_eval_lvp -lvp it
 
+# Evalue the Performace of LVP-C for CIFAR100
+python3 main.py -f cifar100_eval_lvp_c
+
 ```
 
-## | col1 | col2 | col3 | col1 | col2 | col3 |
-| ---- | ---- | ---- | ---- | ---- | ---- |
-|      |      |      |      |      |      |
-|      |      |      |      |      |      |
+## Result in the Demo
 
+The code I provided is ignoring the Continual Learning settings. I believe the code is easy to read and execute. The results for LVP-IT could be higher because I did not grid search the optimal hyperparameters.
 
+| Model Name | RN50 | RN101 | RN50x4 | RN50x16 | RN50x64 | ViT-B/16 | ViT-B/32 | ViT-L/14 | ViT-L/14@336px 
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| model_sel | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| LVI-T  | 0 | 1 | 2 | 3 | 4 | 64.79 | 6 | 7 | 8 |
+| LVI-I  | 0 | 1 | 2 | 3 | 4 | 70.01 | 6 | 7 | 8 |
+| LVI-IT | 0 | 1 | 2 | 3 | 4 | 73.15 | 6 | 7 | 8 |
+| LVI-C  | 0 | 1 | 2 | 3 | 4 | 71.20 | 6 | 7 | 8 |
 
 ## Citation
 
