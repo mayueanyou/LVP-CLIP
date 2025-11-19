@@ -18,7 +18,7 @@ class ClipTransform:
         return f"{self.__class__.__name__}()"
 
 class ClipWrapper():
-    def __init__(self,model_sel=8,classes=[''],base_text='',generate_text=True) -> None:
+    def __init__(self,model_sel=5,classes=[''],base_text='',generate_text=True) -> None:
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model_sel = model_sel
         self.available_models = ['RN50', 'RN101', 'RN50x4', 'RN50x16', 'RN50x64', 'ViT-B/16', 'ViT-B/32', 'ViT-L/14', 'ViT-L/14@336px']
@@ -65,10 +65,10 @@ class ClipWrapper():
         print(acc)
         return acc
     
-    def eval_dataset_lvp(self,lvp,label,dataset,dis_func='Cos'):
+    def eval_dataset_lvp(self,lvp,label,dataset_loader,dis_func='Cos'):
         acc,num_data = 0,0
         label = label.to(self.device)
-        for image_features, labels in tqdm(dataset):
+        for image_features, labels in tqdm(dataset_loader):
             values, indices, similarity = self.similarity_calculator(lvp,image_features,dis_func=dis_func)
             indices = torch.flatten(indices)
             indices = label[indices]
@@ -79,9 +79,9 @@ class ClipWrapper():
         print('accuracy: ',acc)
         return acc,num_data
     
-    def inference_dataset(self,dataset):
+    def inference_dataset(self,dataset_loader):
         data  = {'data':[],'targets':[]}
-        for images, labels in tqdm(dataset):
+        for images, labels in tqdm(dataset_loader):
             img_features = self.generate_img_features(images)
             
             data['data'].append(img_features.cpu().type(torch.float))
@@ -90,11 +90,3 @@ class ClipWrapper():
         data['data'] = torch.cat(data['data'],0)
         data['targets'] = torch.cat(data['targets'],0)
         return data
-
-if __name__ == '__main__':
-    cw = ClipWrapper(8)
-    #test = clip.tokenize('ff adsf fdas')
-    #image = torch.rand((3,224,224))
-    #image = cw.preprocess(image)
-    #cw.generate_img_features(image)
-    
