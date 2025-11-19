@@ -1,7 +1,7 @@
 # LVP-CLIP: Revisiting CLIP for Continual Learning with Label Vector Pool 🚀 [[Paper (CVF Open Access)](https://openaccess.thecvf.com/content/CVPR2025W/MULA2025/html/Ma_LVP-CLIP_Revisiting_CLIP_for_Continual_Learning_with_Label_Vector_Pool_CVPRW_2025_paper.html)] [[PDF]](https://openaccess.thecvf.com/content/CVPR2025W/MULA2025/papers/Ma_LVP-CLIP_Revisiting_CLIP_for_Continual_Learning_with_Label_Vector_Pool_CVPRW_2025_paper.pdf)
 
 
-## Authors
+### Authors
 
 Yue Ma, Huantao Ren, Boyu Wang, Jingang Jin, Senem Velipasalar, Qinru Qiu
 
