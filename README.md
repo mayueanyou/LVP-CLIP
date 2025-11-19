@@ -28,13 +28,21 @@ However, traditional CLIP-based classification is sensitive to the quality of te
 
 -----
 
-![Screenshot of the main app window](images/method.png)
+## Motivation
 
-![Screenshot of the main app window](images/gusian.png)
+### featurs follow gussian distrbution
+
+![features follow gussian distribution](images/gusian.png)
+
+![method](images/method.png)
 
 ## Proposed Method: Label Vector Pool (LVP)
 
 The core idea of **LVP** is to leverage the rich feature space of CLIP by directly using **visual embeddings** from training samples as class prototypes, rather than relying on potentially noisy or inadequate text embeddings.
+
+![method](images/LVP.png)
+
+<img src="images/LVP.png" alt="Alt Text" width="400"/>
 
   * LVP eliminates the dependency on the quality of hand-crafted or auto-generated text prompts/labels.
   * We explore **three variations** of the LVP strategy to maximize performance and efficiency across different continual learning scenarios.
