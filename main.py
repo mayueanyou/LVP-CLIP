@@ -30,8 +30,8 @@ def cifar100_generate_image_embedings(args):
     transform = ClipTransform(model_sel=args.model_sel)
     cifar100_train_dataset = datasets.CIFAR100(root='/datasets/CIFAR100',train=True,download=True,transform=transform)
     cifar100_test_dataset = datasets.CIFAR100(root='/datasets/CIFAR100',train=False,download=True,transform=transform)
-    cifar100_train_loader = torch.utils.data.DataLoader(cifar100_train_dataset,batch_size=256,shuffle=False,num_workers=4)
-    cifar100_test_loader = torch.utils.data.DataLoader(cifar100_test_dataset,batch_size=256,shuffle=False,num_workers=4)
+    cifar100_train_loader = torch.utils.data.DataLoader(cifar100_train_dataset,batch_size=128,shuffle=False,num_workers=4)
+    cifar100_test_loader = torch.utils.data.DataLoader(cifar100_test_dataset,batch_size=128,shuffle=False,num_workers=4)
     train_data = cw.inference_dataset(cifar100_train_loader)
     test_data = cw.inference_dataset(cifar100_test_loader)
     data = {'train':train_data,'test':test_data}
