@@ -51,7 +51,7 @@ Our proposed CTIL is a combination of CIL and DIL that allows for learning tasks
 * **Enhanced Stability and Efficiency:** LVP learning algorithms are **task-order invariant** and result in **minimum catastrophic forgetting** because new knowledge does not modify the old knowledge. Tasks can be learned independently and in parallel with low computational and memory demands.
 * **State-of-the-Art Performance:** Our proposed LVP-based methods significantly **outperform the current state-of-the-art baseline by a margin of 40.7%** on Cross-Task Incremental Learning(CTIL) tasks.
 
-## Demonstration of the advantages of LVP
+## Demonstration of the Advantages of LVP
 
 LVP can be processed **in parallel** and can continuously **acquire new tasks indefinitely**.
 ![method](images/advantages.png)
