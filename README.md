@@ -81,7 +81,7 @@ python3 main.py -f cifar100_generate_image_embedings -m 8
 
 ```
 
-
+All the fucntions are listing below.
 
 ```
 # Convert the CIFAR100 dataset to image embeddings
