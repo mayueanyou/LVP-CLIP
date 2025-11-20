@@ -70,7 +70,7 @@ pip install -r requirements.txt
 
 ## Run The Demo on CIFAR100
 
-Any function could use the -m to select the models, by default is **5** which is the **ViT-B/16**
+Any function could use the **-m** to select the models, by default is **5** which is the **ViT-B/16**
 
 ```
 # Convert the CIFAR100 dataset to image embeddings(use ViT-B/16)
